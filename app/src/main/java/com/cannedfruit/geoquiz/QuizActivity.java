@@ -2,6 +2,7 @@ package com.cannedfruit.geoquiz;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class GeoQuiz extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
+
+    private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX = "index";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -28,6 +32,8 @@ public class GeoQuiz extends AppCompatActivity {
     private int mCurrentIndex = 0;
 
     private void updateQuestion() {
+//        Log.d(TAG, "Updating question text for question #" + mCurrentIndex,
+//                new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
@@ -49,6 +55,7 @@ public class GeoQuiz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -78,7 +85,53 @@ public class GeoQuiz extends AppCompatActivity {
             }
         });
 
+        //Note that the types that you can save to and restore from a Bundle are primitive types and classes
+        //that implement the Serializable or Parcelable interfaces.
+        //It is usually a bad practice to put objects of custom types into a Bundle, however,
+        // because the data might be stale when you get it back out.
+        // It is a better choice to use some other kind of storage for the data
+        // and put a primitive identifier into the Bundle instead.
+        if(savedInstanceState != null){
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
         updateQuestion();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(TAG, "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
     }
 
     @Override
