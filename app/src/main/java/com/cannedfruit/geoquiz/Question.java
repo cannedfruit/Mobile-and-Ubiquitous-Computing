@@ -22,10 +22,10 @@ public class Question {
     }
 
 
-    public boolean isManswerTrue() {
+    public boolean isAnswerTrue() {
         return manswerTrue;
     }
-    public void setManswerTrue(boolean manswerTrue) {
+    public void setAnswerTrue(boolean manswerTrue) {
         this.manswerTrue = manswerTrue;
     }
 }

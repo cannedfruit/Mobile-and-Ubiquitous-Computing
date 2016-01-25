@@ -17,5 +17,6 @@
     <string name="show_answer_button">Show Answer</string>
     <string name="cheat_button">Cheat!</string>
     <string name="judgment_toast">Cheating is wrong.</string>
+    <string name="dumb_toast">How could you still get that wrong?</string>
     <string name="title_activity_cheat">Cheat</string>
 </resources>
